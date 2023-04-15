@@ -9,3 +9,19 @@ resource "newrelic_cloud_aws_link_account" "aws_integration" {
   metric_collection_mode = "PULL"
   name                   = "Shantanu"
 }
+
+# AWS Serivce Integrations with New Relic
+resource "newrelic_cloud_aws_integrations" "aws_integration" {
+  linked_account_id = newrelic_cloud_aws_link_account.aws_integration.id
+  billing {}
+  cloudtrail {
+    metrics_polling_interval = 600
+  }
+  health {
+    metrics_polling_interval = 600
+  }
+  vpc {
+    metrics_polling_interval = 600
+    fetch_nat_gateway        = true
+  }
+}
