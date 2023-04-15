@@ -11,6 +11,7 @@ resource "newrelic_cloud_aws_link_account" "aws_integration" {
 }
 
 # AWS Serivce Integrations with New Relic
+# This resource block does not support all the AWS services that can be integrated with New Relic
 resource "newrelic_cloud_aws_integrations" "aws_integration" {
   linked_account_id = newrelic_cloud_aws_link_account.aws_integration.id
   billing {}
