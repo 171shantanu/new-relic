@@ -14,15 +14,18 @@ resource "newrelic_cloud_aws_link_account" "aws_integration" {
 # This resource block does not support all the AWS services that can be integrated with New Relic
 resource "newrelic_cloud_aws_integrations" "aws_integration" {
   linked_account_id = newrelic_cloud_aws_link_account.aws_integration.id
-  billing {}
-  cloudtrail {
-    metrics_polling_interval = 600
+  billing {
+    metrics_polling_interval = 0
   }
+
   health {
-    metrics_polling_interval = 600
+    metrics_polling_interval = 0
   }
+
   vpc {
-    metrics_polling_interval = 600
-    fetch_nat_gateway        = true
+    aws_regions              = []
+    fetch_nat_gateway        = false
+    fetch_vpn                = false
+    metrics_polling_interval = 0
   }
 }
